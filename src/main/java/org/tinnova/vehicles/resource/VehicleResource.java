@@ -6,15 +6,16 @@ import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.tinnova.vehicles.database.entity.Vehicle;
 import org.tinnova.vehicles.dto.VehicleDto;
 import org.tinnova.vehicles.dto.VehicleFilterDto;
+import org.tinnova.vehicles.dto.VehiclePatchDto;
 import org.tinnova.vehicles.service.VehicleService;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class VehicleResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Vehicle> findAll() {
+    public List<VehicleDto> findAll() {
         return vehicleService.getAllVehicles();
     }
 
@@ -44,30 +45,41 @@ public class VehicleResource {
         @QueryParam("page") int page,
         @QueryParam("size") int size) {
 
-        VehicleFilterDto vehicleFilterDto = new VehicleFilterDto(brand, sold, decade, registeredLastWeek, page, size);
-        List<Vehicle> vehicles = vehicleService.getVehiclesByFilter(vehicleFilterDto);
-        return Response.ok(vehicles).build();
+        VehicleFilterDto vehicleFilterDto = new VehicleFilterDto(
+            brand,
+            sold,
+            decade,
+            registeredLastWeek,
+            page,
+            size
+        );
+        return Response.ok(vehicleService.getVehiclesByFilter(vehicleFilterDto)).build();
     }
 
     @GET
     @Path("/{id}")
     public Response getById(@PathParam("id") Long id) {
-        Vehicle vehicle = vehicleService.getById(id);
-        return Response.ok(vehicle).build();
+        return Response.ok(vehicleService.getById(id)).build();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(VehicleDto vehicleDto) {
-        VehicleDto vehicle = vehicleService.create(vehicleDto);
-        return Response.ok(vehicle).build();
+        return Response.ok(vehicleService.create(vehicleDto)).build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(@PathParam("id") Long id, VehicleDto vehicleDto) {
+        return Response.ok(vehicleService.fullUpdate(id, vehicleDto)).build();
     }
 
     @PATCH
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(VehicleDto vehicleDto) {
-        VehicleDto vehicle = vehicleService.update(vehicleDto);
-        return Response.ok(vehicle).build();
+    public Response partialUpdate(@PathParam("id") Long id, VehiclePatchDto vehiclePatchDto) {
+        return Response.ok(vehicleService.partialUpdate(id, vehiclePatchDto)).build();
     }
 
     @DELETE

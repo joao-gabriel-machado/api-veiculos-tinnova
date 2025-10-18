@@ -8,6 +8,7 @@ import org.tinnova.vehicles.database.entity.Vehicle;
 import org.tinnova.vehicles.database.repository.VehiclesRepository;
 import org.tinnova.vehicles.dto.VehicleDto;
 import org.tinnova.vehicles.dto.VehicleFilterDto;
+import org.tinnova.vehicles.dto.VehiclePatchDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,30 +19,30 @@ public class VehicleService {
     @Inject
     VehiclesRepository vehiclesRepository;
 
-    public List<Vehicle> getAllVehicles() {
-        return vehiclesRepository.findAllVehicles();
+    public List<VehicleDto> getAllVehicles() {
+        return VehicleDto.from(vehiclesRepository.findAllVehicles());
     }
 
-    public List<Vehicle> getVehiclesByFilter(VehicleFilterDto vehicleFilterDto) {
-        return vehiclesRepository.findVehiclesByFilter(vehicleFilterDto);
+    public List<VehicleDto> getVehiclesByFilter(VehicleFilterDto vehicleFilterDto) {
+        return VehicleDto.from(vehiclesRepository.findVehiclesByFilter(vehicleFilterDto));
     }
 
-    public Vehicle getById(Long id) {
-        return vehiclesRepository.findById(id);
+    public VehicleDto getById(Long id) {
+        return VehicleDto.from(vehiclesRepository.findById(id));
     }
 
     @Transactional
     public VehicleDto create(VehicleDto vehicleDto) {
-        Vehicle vehicle = new Vehicle();
+        Vehicle vehicle = VehicleDto.from(vehicleDto);
 
         vehiclesRepository.persist(vehicle);
 
-        return VehicleDto.from(vehicle);
+        return vehicleDto;
     }
 
     @Transactional
-    public VehicleDto update(VehicleDto vehicleDto) {
-        Vehicle existingVehicle = vehiclesRepository.findById(vehicleDto.id());
+    public VehicleDto fullUpdate(Long id, VehicleDto vehicleDto) {
+        Vehicle existingVehicle = vehiclesRepository.findById(id);
         if (existingVehicle == null) {
             throw new NotFoundException("Entity not found with id: " + vehicleDto.id());
         }
@@ -56,12 +57,32 @@ public class VehicleService {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public VehicleDto partialUpdate(Long id, VehiclePatchDto vehiclePatchDto) {
         Vehicle existingVehicle = vehiclesRepository.findById(id);
         if (existingVehicle == null) {
             throw new NotFoundException("Entity not found with id: " + id);
         }
-        vehiclesRepository.deleteById(id);
+
+        if (vehiclePatchDto.brand() != null) {
+            existingVehicle.setBrand(vehiclePatchDto.brand());
+        }
+        if (vehiclePatchDto.yearManufacture() != null) {
+            existingVehicle.setYearManufacture(vehiclePatchDto.yearManufacture());
+        }
+        if (vehiclePatchDto.description() != null) {
+            existingVehicle.setDescription(vehiclePatchDto.description());
+        }
+        if (vehiclePatchDto.sold() != null) {
+            existingVehicle.setSold(vehiclePatchDto.sold());
+        }
+
+        existingVehicle.setUpdatedAt(LocalDate.now());
+
+        return VehicleDto.from(existingVehicle);
     }
 
+    @Transactional
+    public void delete(Long id) {
+        vehiclesRepository.deleteById(id);
+    }
 }

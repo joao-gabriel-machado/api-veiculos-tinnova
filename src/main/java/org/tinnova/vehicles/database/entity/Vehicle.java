@@ -36,6 +36,21 @@ public class Vehicle {
     @Column(name = "updated_at", nullable = false)
     private LocalDate updatedAt;
 
+    public Vehicle(long id, String brand, Integer yearManufacture, String description, boolean sold,
+                   LocalDate createdAt,
+                   LocalDate updatedAt
+    ) {
+        this.id = id;
+        this.brand = brand;
+        this.yearManufacture = yearManufacture;
+        this.description = description;
+        this.sold = sold;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public Vehicle() {}
+
     public long getId() {
         return id;
     }
