@@ -10,8 +10,11 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.tinnova.vehicles.database.entity.Vehicle;
 import org.tinnova.vehicles.dto.VehicleFilterDto;
+import org.tinnova.vehicles.dto.VehiclesPerBrandDto;
+import org.tinnova.vehicles.dto.VehiclesPerDecadeDto;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,5 +63,43 @@ public class VehiclesRepository implements PanacheRepository<Vehicle> {
         query.setMaxResults(vehicleFilterDto.size());
 
         return query.getResultList();
+    }
+
+    public long countUnsold() {
+        return count("sold", false);
+    }
+
+    public List<VehiclesPerDecadeDto> getCountByDecade() {
+
+        String query = """
+        SELECT new org.tinnova.vehicles.dto.VehiclesPerDecadeDto(
+            (v.yearManufacture / 10) * 10,\s
+            COUNT(v)
+        )
+        FROM Vehicle v\s
+        GROUP BY (v.yearManufacture / 10) * 10\s
+        ORDER BY 1
+   \s""";
+
+        return getEntityManager().createQuery(query, VehiclesPerDecadeDto.class).getResultList();
+    }
+
+    public List<VehiclesPerBrandDto> getCountByBrand() {
+        String query = """
+            SELECT new org.tinnova.vehicles.dto.VehiclesPerBrandDto(
+                v.brand,
+                COUNT(v)
+            )
+            FROM Vehicle v
+            GROUP BY v.brand
+            ORDER BY v.brand
+        """;
+
+        return getEntityManager().createQuery(query, VehiclesPerBrandDto.class).getResultList();
+    }
+
+    public List<Vehicle> findRegisteredLastWeek() {
+        LocalDate weekAgo = LocalDate.now().minusDays(7);
+        return list("createdAt >= ?1", weekAgo);
     }
 }

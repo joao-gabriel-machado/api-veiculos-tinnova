@@ -6,9 +6,12 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 import org.tinnova.vehicles.database.entity.Vehicle;
 import org.tinnova.vehicles.database.repository.VehiclesRepository;
+import org.tinnova.vehicles.dto.UnsoldCountDto;
 import org.tinnova.vehicles.dto.VehicleDto;
 import org.tinnova.vehicles.dto.VehicleFilterDto;
 import org.tinnova.vehicles.dto.VehiclePatchDto;
+import org.tinnova.vehicles.dto.VehiclesPerBrandDto;
+import org.tinnova.vehicles.dto.VehiclesPerDecadeDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -33,11 +36,19 @@ public class VehicleService {
 
     @Transactional
     public VehicleDto create(VehicleDto vehicleDto) {
-        Vehicle vehicle = VehicleDto.from(vehicleDto);
+        Vehicle vehicle = new Vehicle();
+
+        vehicle.setBrand(vehicleDto.brand());
+        vehicle.setYearManufacture(vehicleDto.yearManufacture());
+        vehicle.setDescription(vehicleDto.description());
+        vehicle.setSold(vehicleDto.sold());
+
+        vehicle.setCreatedAt(LocalDate.now());
+        vehicle.setUpdatedAt(LocalDate.now());
 
         vehiclesRepository.persist(vehicle);
 
-        return vehicleDto;
+        return VehicleDto.from(vehicle);
     }
 
     @Transactional
@@ -84,5 +95,23 @@ public class VehicleService {
     @Transactional
     public void delete(Long id) {
         vehiclesRepository.deleteById(id);
+    }
+
+    public UnsoldCountDto getUnsoldVehicleCount() {
+        long count = vehiclesRepository.countUnsold();
+        return new UnsoldCountDto(count);
+    }
+
+    public List<VehiclesPerDecadeDto> getDistributionByDecade() {
+        return vehiclesRepository.getCountByDecade();
+    }
+
+    public List<VehiclesPerBrandDto> getDistributionByBrand() {
+        return vehiclesRepository.getCountByBrand();
+    }
+
+    public List<VehicleDto> getRegisteredLastWeek() {
+        List<Vehicle> vehicles = vehiclesRepository.findRegisteredLastWeek();
+        return VehicleDto.from(vehicles);
     }
 }

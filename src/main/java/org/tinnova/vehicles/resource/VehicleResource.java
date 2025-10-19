@@ -16,6 +16,7 @@ import jakarta.ws.rs.core.Response;
 import org.tinnova.vehicles.dto.VehicleDto;
 import org.tinnova.vehicles.dto.VehicleFilterDto;
 import org.tinnova.vehicles.dto.VehiclePatchDto;
+import org.tinnova.vehicles.dto.VehiclesPerDecadeDto;
 import org.tinnova.vehicles.service.VehicleService;
 
 import java.util.List;
@@ -87,5 +88,29 @@ public class VehicleResource {
     public Response delete(@PathParam("id") Long id) {
         vehicleService.delete(id);
         return Response.status(Response.Status.OK).build();
+    }
+
+    @GET
+    @Path("/unsold-count")
+    public Response getUnsoldCount() {
+        return Response.ok(vehicleService.getUnsoldVehicleCount()).build();
+    }
+
+    @GET
+    @Path("/distribution-by-decade")
+    public Response getDistributionByDecade() {
+        return Response.ok(vehicleService.getDistributionByDecade()).build();
+    }
+
+    @GET
+    @Path("/distribution-by-brand")
+    public Response getDistributionByBrand() {
+        return Response.ok(vehicleService.getDistributionByBrand()).build();
+    }
+
+    @GET
+    @Path("/registered-last-week")
+    public Response getRegisteredLastWeek() {
+        return Response.ok(vehicleService.getRegisteredLastWeek()).build();
     }
 }
