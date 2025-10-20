@@ -1,35 +1,13 @@
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Chevrolet', 2016, 'Cruze', false, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Ford', 2003, 'Ford ka', true, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Volkswagen', 1980, 'Fusca', false, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Fiat', 2015, 'Argo', false, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Ferrari', 2020, 'Portofino', true, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Porsche', 2020, 'Cayenne', true, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Chevrolet', 2016, 'Cruze', false, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Ford', 2003, 'Ford ka', true, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Volkswagen', 1980, 'Fusca', false, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Fiat', 2015, 'Argo', false, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Ferrari', 2020, 'Portofino', false, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Porsche', 2020, 'Cayenne', true, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Chevrolet', 2016, 'Cruze', true, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Ford', 2003, 'Ford ka', true, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Volkswagen', 1980, 'Fusca', false, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Fiat', 2015, 'Argo', false, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Ferrari', 2020, 'Portofino', true, clock_timestamp(), clock_timestamp());
-
-insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Porsche', 2020, 'Cayenne', false, clock_timestamp(), clock_timestamp());
+insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Fiat', 1984, 'Uno SX 1.3', true, clock_timestamp(), clock_timestamp());
+insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Chevrolet', 1994, 'Vectra GSi 2.0 16V', true, clock_timestamp(), clock_timestamp());
+insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Volkswagen', 1993, 'Gol GTI 2.0', true, clock_timestamp(), clock_timestamp());
+insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Ford', 1979, 'Maverick GT V8 302', true, clock_timestamp(), clock_timestamp());
+insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Honda', 2007, 'Fit EX 1.5', false, clock_timestamp(), clock_timestamp());
+insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Chevrolet', 2005, 'Astra GSI 2.0 16V', false, clock_timestamp(), clock_timestamp());
+insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Toyota', 2010, 'Hilux SRV 3.0 Diesel', true, clock_timestamp(), clock_timestamp());
+insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Fiat', 2012, 'Punto T-Jet 1.4 Turbo', false, clock_timestamp(), clock_timestamp());
+insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Volkswagen', 2014, 'Golf TSI Highline 1.4', false, clock_timestamp(), clock_timestamp());
+insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Jeep', 2019, 'Compass Limited 2.0', true, clock_timestamp(), clock_timestamp());
+insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('BMW', 2021, 'X1 sDrive20i X-Line', false, clock_timestamp(), clock_timestamp());
+insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Nissan', 2023, 'Kicks Exclusive 1.6', false, clock_timestamp(), clock_timestamp());
+insert into vehicle (brand, year_manufacture, description, sold, created_at, updated_at) values ('Fiat', 2024, 'Fastback Abarth 1.3 Turbo', false, clock_timestamp(), clock_timestamp());

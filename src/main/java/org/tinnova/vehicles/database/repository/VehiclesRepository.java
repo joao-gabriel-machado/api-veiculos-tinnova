@@ -73,13 +73,13 @@ public class VehiclesRepository implements PanacheRepository<Vehicle> {
 
         String query = """
         SELECT new org.tinnova.vehicles.dto.VehiclesPerDecadeDto(
-            (v.yearManufacture / 10) * 10,\s
+            (v.yearManufacture / 10) * 10,
             COUNT(v)
         )
-        FROM Vehicle v\s
-        GROUP BY (v.yearManufacture / 10) * 10\s
+        FROM Vehicle v
+        GROUP BY (v.yearManufacture / 10) * 10
         ORDER BY 1
-   \s""";
+   """;
 
         return getEntityManager().createQuery(query, VehiclesPerDecadeDto.class).getResultList();
     }

@@ -36,19 +36,14 @@ public class VehicleService {
 
     @Transactional
     public VehicleDto create(VehicleDto vehicleDto) {
-        Vehicle vehicle = new Vehicle();
-
-        vehicle.setBrand(vehicleDto.brand());
-        vehicle.setYearManufacture(vehicleDto.yearManufacture());
-        vehicle.setDescription(vehicleDto.description());
-        vehicle.setSold(vehicleDto.sold());
+        Vehicle vehicle = VehicleDto.from(vehicleDto);
 
         vehicle.setCreatedAt(LocalDate.now());
         vehicle.setUpdatedAt(LocalDate.now());
 
         vehiclesRepository.persist(vehicle);
 
-        return VehicleDto.from(vehicle);
+        return vehicleDto;
     }
 
     @Transactional

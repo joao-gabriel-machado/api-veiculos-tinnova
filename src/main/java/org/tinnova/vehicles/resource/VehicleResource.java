@@ -16,7 +16,6 @@ import jakarta.ws.rs.core.Response;
 import org.tinnova.vehicles.dto.VehicleDto;
 import org.tinnova.vehicles.dto.VehicleFilterDto;
 import org.tinnova.vehicles.dto.VehiclePatchDto;
-import org.tinnova.vehicles.dto.VehiclesPerDecadeDto;
 import org.tinnova.vehicles.service.VehicleService;
 
 import java.util.List;
