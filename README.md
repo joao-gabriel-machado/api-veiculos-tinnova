@@ -1,62 +1,43 @@
-# api-vehicles
+# API de Cadastro de Veículos - Teste Técnico Tinnova
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+API RESTful para gerenciamento de veículos, desenvolvida como parte do processo seletivo da Tinnova. O projeto permite listar, criar, editar, excluir e filtrar veículos, além de prover endpoints de estatísticas.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+## 📄 Documentação
 
-## Running the application in dev mode
+A documentação OpenAPI (Swagger UI) é gerada automaticamente pela aplicação. Após iniciar o servidor, ela ficará disponível neste endereço:
 
-You can run your application in dev mode that enables live coding using:
+[http://localhost:8080/q/swagger-ui/](http://localhost:8080/q/swagger-ui/)
 
-```shell script
-./gradlew quarkusDev
-```
+## 🛠️ Tecnologias Principais
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+* **Java 21**
+* **Quarkus** (Framework)
+* **Hibernate ORM + Panache** (Acesso a dados)
+* **Flyway** (Migrações de banco)
+* **PostgreSQL** (Banco de Dados)
+* **Gradle** (Build)
+* **Docker** (Containerização do banco)
 
-## Packaging and running the application
+## 🚀 Como Executar
 
-The application can be packaged using:
+1.  **Clone o repositório**
+    ```bash
+    git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
+    cd seu-repositorio
+    ```
 
-```shell script
-./gradlew build
-```
+2.  **Inicie o Banco de Dados**
+    O projeto usa Docker Compose para subir o PostgreSQL. As credenciais já estão configuradas no `application.properties`.
+    ```bash
+    docker-compose up -d
+    ```
 
-It produces the `quarkus-run.jar` file in the `build/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `build/quarkus-app/lib/` directory.
+3.  **Execute a aplicação**
+    O Flyway executará as migrações automaticamente ao iniciar.
+    ```bash
+    ./gradlew quarkusDev
+    ```
+    A API estará disponível em `http://localhost:8080`.
 
-The application is now runnable using `java -jar build/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./gradlew build -Dquarkus.package.jar.type=uber-jar
-```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar build/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./gradlew build -Dquarkus.native.enabled=true
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./gradlew build -Dquarkus.native.enabled=true -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./build/api-vehicles-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/gradle-tooling>.
-
-## Provided Code
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+## 🚀 Exercícios de Lógica
+Para executar os exercicios de logica basta executar a classe `MainExercises.java` ela executara os 4 exercicios.
